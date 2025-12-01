@@ -28,23 +28,9 @@
                         'luxury-purple': '#6366F1',
                         'luxury-pink': '#F472B6',
                         'cream': '#FEF7ED'
-                    },
-                    backgroundImage: {
-                        'gradient-luxury': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        'gradient-pearl': 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
-                        'gradient-rose': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                        'gradient-purple': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'shimmer': 'shimmer 2s infinite',
-                        'bounce-slow': 'bounce 3s infinite',
-                        'pulse-slow': 'pulse 3s infinite',
                     }
                 }
-            },
-            plugins: [],
+            }
         }
 
         // Dark mode detection
@@ -190,7 +176,7 @@
             background: linear-gradient(135deg, #8B5CF6, #EC4899);
             border-radius: 50%;
             opacity: 0.1;
-            animation: pulse-slow 3s infinite;
+            animation: pulse 3s infinite;
         }
 
         .dark .image-placeholder {
@@ -618,8 +604,8 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-green-600">واتساب</h4>
-                                <a href="https://wa.me/971562155674" class="text-green-500 hover:text-green-600 transition-colors" dir="ltr">
-                                    +971562155674
+                                <a href="https://wa.me/971123456789" class="text-green-500 hover:text-green-600 transition-colors" dir="ltr">
+                                    +971 123 456 789
                                 </a>
                             </div>
                         </div>
@@ -631,8 +617,8 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-blue-600">الهاتف المباشر</h4>
-                                <a href="tel:971562155674" class="text-blue-500 hover:text-blue-600 transition-colors" dir="ltr">
-                                    +971562155674
+                                <a href="tel:971123456789" class="text-blue-500 hover:text-blue-600 transition-colors" dir="ltr">
+                                    +971 123 456 789
                                 </a>
                             </div>
                         </div>
@@ -692,10 +678,10 @@
             </div>
             
             <div class="flex justify-center space-x-6 space-x-reverse mb-8">
-                <a href="https://wa.me/971562155674" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                <a href="https://wa.me/971123456789" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
                     <i class="fab fa-whatsapp text-xl"></i>
                 </a>
-                <a href="tel:971562155674" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                <a href="tel:971123456789" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
                     <i class="fas fa-phone text-xl"></i>
                 </a>
             </div>
@@ -713,7 +699,7 @@
 
         function contactUs(productName) {
             const message = `السلام عليكم، أريد الاستفسار عن ${productName}`;
-            const whatsappUrl = `https://wa.me/971562155674?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/971123456789?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
@@ -743,7 +729,7 @@
             }
             message += `\nأرجو التواصل معي لتأكيد الطلب، شكراً لكم.`;
             
-            const whatsappUrl = `https://wa.me/971562155674?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/971123456789?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
             // Reset form
