@@ -19,15 +19,18 @@
                         'cairo': ['Cairo', 'sans-serif'],
                     },
                     colors: {
-                        'primary': '#8B5CF6',
-                        'primary-dark': '#7C3AED',
-                        'secondary': '#EC4899',
-                        'accent': '#F472B6',
-                        'rose-gold': '#F9A8D4',
-                        'pearl': '#FDF2F8',
-                        'luxury-purple': '#6366F1',
-                        'luxury-pink': '#F472B6',
-                        'cream': '#FEF7ED'
+                        'primary': '#1E40AF',
+                        'primary-dark': '#1D4ED8',
+                        'secondary': '#059669',
+                        'accent': '#DC2626',
+                        'gold': '#F59E0B',
+                        'cream': '#FEF3C7',
+                        'soft-blue': '#DBEAFE',
+                        'soft-green': '#D1FAE5',
+                        'soft-pink': '#FCE7F3'
+                    },
+                    screens: {
+                        'xs': '475px',
                     }
                 }
             }
@@ -48,220 +51,110 @@
     <style>
         * {
             font-family: 'Cairo', 'Amiri', 'Tahoma', 'Arial', sans-serif;
-        }
-        
-        .product-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .product-card:hover::before {
-            left: 100%;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.1);
-        }
-        
-        .luxury-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .hero-pattern {
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .floating {
-            animation: float 6s ease-in-out infinite;
+        html, body {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+        .hero-bg {
+            background: linear-gradient(135deg, #1E40AF 0%, #3730A3 50%, #059669 100%);
         }
 
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
-            to { box-shadow: 0 0 30px rgba(139, 92, 246, 0.6); }
+        .card-hover {
+            transition: all 0.3s ease;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .glow-effect {
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        .shimmer {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shimmer::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        .glass-effect {
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .dark .glass-effect {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .luxury-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid rgba(139, 92, 246, 0.1);
-            box-shadow: 
-                0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -1px rgba(0, 0, 0, 0.06),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-        }
-
-        .dark .luxury-card {
-            background: linear-gradient(145deg, #374151 0%, #1f2937 100%);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            box-shadow: 
-                0 4px 6px -1px rgba(0, 0, 0, 0.3),
-                0 2px 4px -1px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .image-placeholder {
-            background: 
-                linear-gradient(45deg, transparent 30%, rgba(139, 92, 246, 0.1) 30%, rgba(139, 92, 246, 0.1) 70%, transparent 70%),
-                linear-gradient(-45deg, transparent 30%, rgba(244, 114, 182, 0.1) 30%, rgba(244, 114, 182, 0.1) 70%, transparent 70%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .image-placeholder::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: pulse 3s infinite;
-        }
-
-        .dark .image-placeholder {
-            background: 
-                linear-gradient(45deg, transparent 30%, rgba(139, 92, 246, 0.2) 30%, rgba(139, 92, 246, 0.2) 70%, transparent 70%),
-                linear-gradient(-45deg, transparent 30%, rgba(244, 114, 182, 0.2) 30%, rgba(244, 114, 182, 0.2) 70%, transparent 70%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
-            border: none;
+            background: linear-gradient(135deg, #1E40AF 0%, #059669 100%);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .btn-primary:hover::before {
-            left: 0;
-        }
-
-        .stars-container {
-            display: flex;
-            gap: 2px;
-        }
-
-        .star {
-            color: #F59E0B;
-            filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.5));
-            animation: twinkle 2s ease-in-out infinite;
-            animation-delay: var(--delay, 0s);
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        .section-title {
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .contact-card {
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .contact-card:hover {
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1D4ED8 0%, #047857 100%);
             transform: translateY(-2px);
-            border-color: rgba(139, 92, 246, 0.2);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
         }
 
-        .icon-glow {
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        .section-bg-1 {
+            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
         }
 
-        .pulse-ring {
-            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        .section-bg-2 {
+            background: linear-gradient(135deg, #F0F9FF 0%, #DBEAFE 100%);
         }
 
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(0.8);
-                opacity: 1;
+        .section-bg-3 {
+            background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            z-index: 10;
+        }
+
+        .badge-bestseller { background: linear-gradient(45deg, #F59E0B, #D97706); }
+        .badge-natural { background: linear-gradient(45deg, #059669, #047857); }
+        .badge-new { background: linear-gradient(45deg, #DC2626, #B91C1C); }
+
+        .rating-stars {
+            color: #F59E0B;
+            font-size: 14px;
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+                line-height: 1.1;
             }
-            100% {
-                transform: scale(2);
-                opacity: 0;
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
@@ -269,290 +162,270 @@
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
 
     <!-- Header -->
-    <header class="luxury-gradient hero-pattern text-white shadow-2xl sticky top-0 z-50 backdrop-blur-sm">
-        <div class="container mx-auto px-4 py-6">
+    <header class="hero-bg text-white shadow-lg sticky top-0 z-50 backdrop-blur-sm">
+        <nav class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4 space-x-reverse">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 space-x-reverse">
                     <div class="relative">
-                        <div class="w-16 h-16 glass-effect rounded-full flex items-center justify-center floating glow-effect">
-                            <i class="fas fa-gem text-rose-gold text-2xl"></i>
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-gem text-gold text-xl md:text-2xl"></i>
                         </div>
-                        <div class="absolute -top-1 -right-1 w-6 h-6 bg-rose-gold rounded-full flex items-center justify-center pulse-ring">
+                        <div class="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gold rounded-full flex items-center justify-center">
                             <i class="fas fa-sparkles text-xs text-white"></i>
                         </div>
                     </div>
                     <div>
-                        <h1 class="text-2xl md:text-4xl font-bold font-amiri mb-1">أم حمودي</h1>
-                        <p class="text-sm opacity-90 font-cairo">للمستحضرات النسائية الطبيعية ✨</p>
+                        <h1 class="text-xl md:text-2xl lg:text-3xl font-bold font-amiri">أم حمودي</h1>
+                        <p class="text-xs md:text-sm opacity-90 font-cairo">للمستحضرات النسائية الطبيعية</p>
                     </div>
                 </div>
-                <nav class="hidden md:flex space-x-8 space-x-reverse">
-                    <a href="#products" class="flex items-center space-x-2 space-x-reverse hover:text-rose-gold transition-all duration-300 transform hover:scale-105 font-cairo font-semibold">
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8 space-x-reverse">
+                    <a href="#home" class="flex items-center space-x-2 space-x-reverse hover:text-gold transition-colors font-cairo font-semibold">
+                        <i class="fas fa-home text-sm"></i>
+                        <span>الرئيسية</span>
+                    </a>
+                    <a href="#products" class="flex items-center space-x-2 space-x-reverse hover:text-gold transition-colors font-cairo font-semibold">
                         <i class="fas fa-shopping-bag text-sm"></i>
                         <span>المنتجات</span>
                     </a>
-                    <a href="#contact" class="flex items-center space-x-2 space-x-reverse hover:text-rose-gold transition-all duration-300 transform hover:scale-105 font-cairo font-semibold">
-                        <i class="fas fa-comments text-sm"></i>
-                        <span>تواصل معنا</span>
-                    </a>
-                    <a href="#about" class="flex items-center space-x-2 space-x-reverse hover:text-rose-gold transition-all duration-300 transform hover:scale-105 font-cairo font-semibold">
+                    <a href="#about" class="flex items-center space-x-2 space-x-reverse hover:text-gold transition-colors font-cairo font-semibold">
                         <i class="fas fa-heart text-sm"></i>
                         <span>من نحن</span>
                     </a>
-                </nav>
+                    <a href="#contact" class="flex items-center space-x-2 space-x-reverse hover:text-gold transition-colors font-cairo font-semibold">
+                        <i class="fas fa-phone text-sm"></i>
+                        <span>التواصل</span>
+                    </a>
+                </div>
+
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden glass-effect p-2 rounded-lg" onclick="toggleMobileMenu()">
+                <button class="md:hidden bg-white bg-opacity-20 p-2 rounded-lg backdrop-blur-sm" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
-            
+
             <!-- Mobile Menu -->
-            <div id="mobileMenu" class="md:hidden mt-6 space-y-4 hidden">
-                <a href="#products" class="flex items-center space-x-2 space-x-reverse py-2 px-4 glass-effect rounded-lg hover:bg-white hover:bg-opacity-20 transition-all" onclick="toggleMobileMenu()">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span>المنتجات</span>
+            <div id="mobileMenu" class="md:hidden mt-4 space-y-2 hidden">
+                <a href="#home" class="block py-2 px-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm hover:bg-opacity-20 transition-all font-cairo" onclick="toggleMobileMenu()">
+                    <i class="fas fa-home ml-2"></i>الرئيسية
                 </a>
-                <a href="#contact" class="flex items-center space-x-2 space-x-reverse py-2 px-4 glass-effect rounded-lg hover:bg-white hover:bg-opacity-20 transition-all" onclick="toggleMobileMenu()">
-                    <i class="fas fa-comments"></i>
-                    <span>تواصل معنا</span>
+                <a href="#products" class="block py-2 px-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm hover:bg-opacity-20 transition-all font-cairo" onclick="toggleMobileMenu()">
+                    <i class="fas fa-shopping-bag ml-2"></i>المنتجات
                 </a>
-                <a href="#about" class="flex items-center space-x-2 space-x-reverse py-2 px-4 glass-effect rounded-lg hover:bg-white hover:bg-opacity-20 transition-all" onclick="toggleMobileMenu()">
-                    <i class="fas fa-heart"></i>
-                    <span>من نحن</span>
+                <a href="#about" class="block py-2 px-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm hover:bg-opacity-20 transition-all font-cairo" onclick="toggleMobileMenu()">
+                    <i class="fas fa-heart ml-2"></i>من نحن
+                </a>
+                <a href="#contact" class="block py-2 px-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm hover:bg-opacity-20 transition-all font-cairo" onclick="toggleMobileMenu()">
+                    <i class="fas fa-phone ml-2"></i>التواصل
                 </a>
             </div>
-        </div>
+        </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="luxury-gradient hero-pattern text-white py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10"></div>
+    <section id="home" class="hero-bg text-white py-16 md:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/10"></div>
         <div class="container mx-auto px-4 text-center relative z-10">
-            <div class="floating mb-8">
-                <div class="w-32 h-32 mx-auto mb-6 glass-effect rounded-full flex items-center justify-center glow-effect">
-                    <i class="fas fa-crown text-rose-gold text-5xl"></i>
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                        <i class="fas fa-crown text-gold text-4xl md:text-5xl"></i>
+                    </div>
+                </div>
+                
+                <h2 class="hero-title text-3xl md:text-5xl lg:text-6xl font-bold font-amiri mb-6 leading-tight">
+                    جمالك طبيعي
+                    <span class="block text-gold">مع أم حمودي ✨</span>
+                </h2>
+                
+                <p class="hero-subtitle text-base md:text-lg lg:text-xl mb-10 max-w-2xl mx-auto leading-relaxed opacity-95 font-cairo">
+                    مستحضرات طبيعية عالية الجودة لجمالك الخاص، مصنوعة بعناية فائقة لتناسب احتياجات المرأة العصرية
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button onclick="scrollToSection('products')" class="btn-primary w-full sm:w-auto px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center font-cairo text-lg">
+                        <i class="fas fa-shopping-bag ml-2"></i>
+                        <span>تسوقي الآن</span>
+                    </button>
+                    <button onclick="scrollToSection('contact')" class="w-full sm:w-auto border-2 border-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-primary transition-all backdrop-blur-sm flex items-center justify-center font-cairo text-lg">
+                        <i class="fab fa-whatsapp ml-2"></i>
+                        <span>تواصلي معنا</span>
+                    </button>
                 </div>
             </div>
-            <h2 class="text-5xl md:text-7xl font-bold font-amiri mb-6 leading-tight">
-                جمالك طبيعي 
-                <span class="text-rose-gold">✨</span>
-            </h2>
-            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed opacity-95 font-cairo">
-                مستحضرات طبيعية عالية الجودة لجمالك الخاص، مصنوعة بعناية فائقة لتناسب احتياجات المرأة العصرية
-            </p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <button onclick="scrollToSection('products')" class="bg-white text-purple-600 px-10 py-4 rounded-2xl font-bold hover:bg-gray-100 transition-all transform hover:scale-105 hover:shadow-2xl flex items-center space-x-2 space-x-reverse font-cairo text-lg">
-                    <i class="fas fa-shopping-bag ml-2"></i>
-                    <span>تسوقي الآن</span>
-                </button>
-                <button onclick="scrollToSection('contact')" class="border-2 border-white px-10 py-4 rounded-2xl font-bold hover:bg-white hover:text-purple-600 transition-all transform hover:scale-105 glass-effect flex items-center space-x-2 space-x-reverse font-cairo text-lg">
-                    <i class="fas fa-comments ml-2"></i>
-                    <span>تواصلي معنا</span>
-                </button>
-            </div>
-            
-            <!-- Features Icons -->
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+
+            <!-- Features -->
+            <div class="features-grid grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto mt-16">
                 <div class="text-center">
-                    <div class="w-16 h-16 glass-effect rounded-full flex items-center justify-center mx-auto mb-3 floating" style="animation-delay: 0.5s">
-                        <i class="fas fa-leaf text-green-400 text-2xl"></i>
+                    <div class="w-14 h-14 md:w-16 md:h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
+                        <i class="fas fa-leaf text-secondary text-xl md:text-2xl"></i>
                     </div>
-                    <p class="text-sm font-cairo font-semibold">طبيعي 100%</p>
+                    <p class="text-xs md:text-sm font-cairo font-semibold">طبيعي 100%</p>
                 </div>
                 <div class="text-center">
-                    <div class="w-16 h-16 glass-effect rounded-full flex items-center justify-center mx-auto mb-3 floating" style="animation-delay: 1s">
-                        <i class="fas fa-award text-yellow-400 text-2xl"></i>
+                    <div class="w-14 h-14 md:w-16 md:h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
+                        <i class="fas fa-award text-gold text-xl md:text-2xl"></i>
                     </div>
-                    <p class="text-sm font-cairo font-semibold">جودة عالية</p>
+                    <p class="text-xs md:text-sm font-cairo font-semibold">جودة عالية</p>
                 </div>
                 <div class="text-center">
-                    <div class="w-16 h-16 glass-effect rounded-full flex items-center justify-center mx-auto mb-3 floating" style="animation-delay: 1.5s">
-                        <i class="fas fa-shipping-fast text-blue-400 text-2xl"></i>
+                    <div class="w-14 h-14 md:w-16 md:h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
+                        <i class="fas fa-shipping-fast text-blue-400 text-xl md:text-2xl"></i>
                     </div>
-                    <p class="text-sm font-cairo font-semibold">توصيل سريع</p>
+                    <p class="text-xs md:text-sm font-cairo font-semibold">توصيل سريع</p>
                 </div>
                 <div class="text-center">
-                    <div class="w-16 h-16 glass-effect rounded-full flex items-center justify-center mx-auto mb-3 floating" style="animation-delay: 2s">
-                        <i class="fas fa-heart text-red-400 text-2xl"></i>
+                    <div class="w-14 h-14 md:w-16 md:h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
+                        <i class="fas fa-heart text-pink-400 text-xl md:text-2xl"></i>
                     </div>
-                    <p class="text-sm font-cairo font-semibold">صنع بحب</p>
+                    <p class="text-xs md:text-sm font-cairo font-semibold">صنع بحب</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-20 bg-white dark:bg-gray-800">
+    <section id="products" class="py-16 md:py-24 section-bg-1 dark:bg-gray-800">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">منتجاتنا المميزة</h2>
-                <p class="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-primary font-amiri">منتجاتنا المميزة</h2>
+                <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-cairo leading-relaxed">
                     مجموعة متنوعة من المستحضرات الطبيعية المصممة خصيصاً لجمالك وعنايتك
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="product-grid grid gap-6 md:gap-8 max-w-7xl mx-auto">
                 <!-- Product 1: زيت كركار -->
-                <div class="product-card luxury-card rounded-3xl shadow-2xl overflow-hidden">
-                    <div class="relative">
-                        <div class="h-72 image-placeholder flex items-center justify-center relative">
-                            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center">
-                                <i class="fas fa-leaf mr-1"></i>
-                                طبيعي
-                            </div>
-                            <div class="text-center text-gray-500 dark:text-gray-400">
-                                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-3xl">
-                                    <i class="fas fa-tint"></i>
-                                </div>
-                                <p class="text-lg font-bold font-cairo">زيت كركار</p>
-                                <p class="text-xs opacity-75">سيتم إضافة الصورة قريباً</p>
-                            </div>
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-600 relative">
+                    <div class="badge badge-bestseller">الأكثر مبيعاً</div>
+                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=250&fit=crop&auto=format" alt="زيت كركار الطبيعي" class="product-image">
+                    
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-primary font-cairo">زيت كركار الطبيعي</h3>
+                            <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs font-bold">متوفر</span>
                         </div>
-                        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-2xl font-bold text-primary font-cairo">زيت كركار الطبيعي</h3>
-                            <div class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                الأكثر مبيعاً
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="rating-stars flex gap-1 ml-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
+                            <span class="text-gray-500 text-sm font-cairo">(127 تقييم)</span>
                         </div>
-                        <div class="flex items-center mb-4 text-amber-500">
-                            <div class="stars-container ml-2">
-                                <i class="star fas fa-star" style="--delay: 0.1s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.2s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.3s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.4s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.5s"></i>
-                            </div>
-                            <span class="text-gray-500 text-sm">(5.0)</span>
-                        </div>
+                        
                         <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed font-cairo">
                             زيت طبيعي فاخر للعناية بالشعر والبشرة، يغذي ويرطب بعمق لإطلالة صحية ومشرقة
                         </p>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center text-green-600 text-sm">
-                                <i class="fas fa-check-circle mr-2"></i>
-                                متوفر الآن
+                        
+                        <div class="flex items-center justify-between mb-6 text-sm">
+                            <div class="flex items-center text-secondary">
+                                <i class="fas fa-leaf ml-2"></i>
+                                <span class="font-cairo">طبيعي 100%</span>
                             </div>
-                            <div class="flex items-center text-blue-600 text-sm">
-                                <i class="fas fa-shipping-fast mr-2"></i>
-                                توصيل مجاني
+                            <div class="flex items-center text-blue-600">
+                                <i class="fas fa-shipping-fast ml-2"></i>
+                                <span class="font-cairo">توصيل مجاني</span>
                             </div>
                         </div>
-                        <button onclick="contactUs('زيت كركار')" class="btn-primary w-full text-white py-4 rounded-2xl font-bold transition-all transform hover:scale-105 flex items-center justify-center font-cairo text-lg shadow-xl">
+                        
+                        <button onclick="contactUs('زيت كركار الطبيعي')" class="btn-primary w-full text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center font-cairo text-base md:text-lg">
                             <i class="fab fa-whatsapp ml-2 text-xl"></i>
-                            اطلبي عبر واتساب
+                            اطلبي الآن عبر واتساب
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 2: صابون صابونيه -->
-                <div class="product-card luxury-card rounded-3xl shadow-2xl overflow-hidden">
-                    <div class="relative">
-                        <div class="h-72 image-placeholder flex items-center justify-center relative">
-                            <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center">
-                                <i class="fas fa-droplet mr-1"></i>
-                                مرطب
-                            </div>
-                            <div class="text-center text-gray-500 dark:text-gray-400">
-                                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full flex items-center justify-center text-white text-3xl">
-                                    <i class="fas fa-soap"></i>
-                                </div>
-                                <p class="text-lg font-bold font-cairo">صابون صابونيه</p>
-                                <p class="text-xs opacity-75">سيتم إضافة الصورة قريباً</p>
-                            </div>
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-600 relative">
+                    <div class="badge badge-natural">طبيعي</div>
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=250&fit=crop&auto=format" alt="صابون صابونيه" class="product-image">
+                    
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-primary font-cairo">صابون صابونيه الطبيعي</h3>
+                            <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs font-bold">متوفر</span>
                         </div>
-                        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-2xl font-bold text-primary font-cairo">صابون صابونيه</h3>
-                            <div class="bg-gradient-to-r from-green-400 to-blue-400 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                للبشرة الحساسة
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="rating-stars flex gap-1 ml-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
+                            <span class="text-gray-500 text-sm font-cairo">(89 تقييم)</span>
                         </div>
-                        <div class="flex items-center mb-4 text-amber-500">
-                            <div class="stars-container ml-2">
-                                <i class="star fas fa-star" style="--delay: 0.1s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.2s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.3s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.4s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.5s"></i>
-                            </div>
-                            <span class="text-gray-500 text-sm">(4.9)</span>
-                        </div>
+                        
                         <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed font-cairo">
                             صابون طبيعي مصنوع من أجود المواد الطبيعية، ينظف البشرة بلطف ويحافظ على نعومتها
                         </p>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center text-green-600 text-sm">
-                                <i class="fas fa-check-circle mr-2"></i>
-                                متوفر الآن
+                        
+                        <div class="flex items-center justify-between mb-6 text-sm">
+                            <div class="flex items-center text-purple-600">
+                                <i class="fas fa-shield-heart ml-2"></i>
+                                <span class="font-cairo">للبشرة الحساسة</span>
                             </div>
-                            <div class="flex items-center text-purple-600 text-sm">
-                                <i class="fas fa-shield-heart mr-2"></i>
-                                آمن للبشرة
+                            <div class="flex items-center text-secondary">
+                                <i class="fas fa-droplet ml-2"></i>
+                                <span class="font-cairo">مرطب</span>
                             </div>
                         </div>
-                        <button onclick="contactUs('صابون صابونيه')" class="btn-primary w-full text-white py-4 rounded-2xl font-bold transition-all transform hover:scale-105 flex items-center justify-center font-cairo text-lg shadow-xl">
+                        
+                        <button onclick="contactUs('صابون صابونيه الطبيعي')" class="btn-primary w-full text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center font-cairo text-base md:text-lg">
                             <i class="fab fa-whatsapp ml-2 text-xl"></i>
-                            اطلبي عبر واتساب
+                            اطلبي الآن عبر واتساب
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 3: كريم شعر سواني -->
-                <div class="product-card luxury-card rounded-3xl shadow-2xl overflow-hidden">
-                    <div class="relative">
-                        <div class="h-72 image-placeholder flex items-center justify-center relative">
-                            <div class="absolute top-4 right-4 bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center">
-                                <i class="fas fa-sparkles mr-1"></i>
-                                مغذي
-                            </div>
-                            <div class="text-center text-gray-500 dark:text-gray-400">
-                                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-pink-400 to-rose-400 rounded-full flex items-center justify-center text-white text-3xl">
-                                    <i class="fas fa-pump-medical"></i>
-                                </div>
-                                <p class="text-lg font-bold font-cairo">كريم شعر سواني</p>
-                                <p class="text-xs opacity-75">سيتم إضافة الصورة قريباً</p>
-                            </div>
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-600 relative">
+                    <div class="badge badge-new">جديد</div>
+                    <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&h=250&fit=crop&auto=format" alt="كريم شعر سواني" class="product-image">
+                    
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-primary font-cairo">كريم شعر سواني المغذي</h3>
+                            <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs font-bold">متوفر</span>
                         </div>
-                        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-2xl font-bold text-primary font-cairo">كريم شعر سواني</h3>
-                            <div class="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                جديد
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="rating-stars flex gap-1 ml-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
+                            <span class="text-gray-500 text-sm font-cairo">(156 تقييم)</span>
                         </div>
-                        <div class="flex items-center mb-4 text-amber-500">
-                            <div class="stars-container ml-2">
-                                <i class="star fas fa-star" style="--delay: 0.1s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.2s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.3s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.4s"></i>
-                                <i class="star fas fa-star" style="--delay: 0.5s"></i>
-                            </div>
-                            <span class="text-gray-500 text-sm">(5.0)</span>
-                        </div>
+                        
                         <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed font-cairo">
                             كريم مغذي للشعر يعيد إليه حيويته ولمعانه الطبيعي، مناسب لجميع أنواع الشعر
                         </p>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center text-green-600 text-sm">
-                                <i class="fas fa-check-circle mr-2"></i>
-                                متوفر الآن
+                        
+                        <div class="flex items-center justify-between mb-6 text-sm">
+                            <div class="flex items-center text-pink-600">
+                                <i class="fas fa-sparkles ml-2"></i>
+                                <span class="font-cairo">للشعر التالف</span>
                             </div>
-                            <div class="flex items-center text-orange-600 text-sm">
-                                <i class="fas fa-fire mr-2"></i>
-                                الأكثر طلباً
+                            <div class="flex items-center text-orange-600">
+                                <i class="fas fa-fire ml-2"></i>
+                                <span class="font-cairo">الأكثر طلباً</span>
                             </div>
                         </div>
-                        <button onclick="contactUs('كريم شعر سواني')" class="btn-primary w-full text-white py-4 rounded-2xl font-bold transition-all transform hover:scale-105 flex items-center justify-center font-cairo text-lg shadow-xl">
+                        
+                        <button onclick="contactUs('كريم شعر سواني المغذي')" class="btn-primary w-full text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center font-cairo text-base md:text-lg">
                             <i class="fab fa-whatsapp ml-2 text-xl"></i>
-                            اطلبي عبر واتساب
+                            اطلبي الآن عبر واتساب
                         </button>
                     </div>
                 </div>
@@ -561,105 +434,142 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-800">
+    <section id="about" class="py-16 md:py-24 section-bg-2 dark:bg-gray-700">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-8">من نحن</h2>
-                <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full mx-auto mb-6 flex items-center justify-center">
-                        <i class="fas fa-heart text-white text-2xl"></i>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-primary font-amiri">من نحن</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100 dark:border-gray-600">
+                    <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-primary to-secondary rounded-full mx-auto mb-8 flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-2xl md:text-3xl"></i>
                     </div>
-                    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                        في <strong>أم حمودي للمستحضرات النسائية</strong>، نؤمن بقوة الطبيعة في العناية بجمالك. 
+                    <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8 font-cairo">
+                        في <strong class="text-primary">أم حمودي للمستحضرات النسائية</strong>، نؤمن بقوة الطبيعة في العناية بجمالك. 
                         نحن نقدم منتجات طبيعية عالية الجودة مصنوعة بحب وعناية فائقة لتناسب احتياجات المرأة العصرية.
                     </p>
-                    <p class="text-gray-600 dark:text-gray-400">
-                        كل منتج نقدمه هو نتيجة بحث وتطوير مستمر لضمان حصولك على أفضل النتائج الطبيعية والآمنة.
-                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 text-right">
+                        <div class="bg-soft-blue dark:bg-gray-700 p-6 rounded-xl">
+                            <i class="fas fa-leaf text-secondary text-2xl mb-3 block"></i>
+                            <h4 class="font-bold text-lg mb-2 font-cairo">مكونات طبيعية</h4>
+                            <p class="text-gray-600 dark:text-gray-300 font-cairo">جميع منتجاتنا مصنوعة من مكونات طبيعية 100% بدون مواد كيميائية ضارة</p>
+                        </div>
+                        <div class="bg-soft-green dark:bg-gray-700 p-6 rounded-xl">
+                            <i class="fas fa-award text-gold text-2xl mb-3 block"></i>
+                            <h4 class="font-bold text-lg mb-2 font-cairo">جودة مضمونة</h4>
+                            <p class="text-gray-600 dark:text-gray-300 font-cairo">كل منتج يخضع لاختبارات الجودة الصارمة لضمان أفضل النتائج</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white dark:bg-gray-800">
+    <section id="contact" class="py-16 md:py-24 section-bg-3 dark:bg-gray-800">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">تواصلي معنا</h2>
-                <p class="text-gray-600 dark:text-gray-300 text-lg">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-primary font-amiri">تواصلي معنا</h2>
+                <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 font-cairo">
                     نحن هنا لخدمتك ولتلبية جميع احتياجاتك من المستحضرات الطبيعية
                 </p>
             </div>
             
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
                     <!-- Contact Info -->
-                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-800 rounded-3xl p-8">
-                        <h3 class="text-2xl font-bold mb-6 text-center">معلومات التواصل</h3>
+                    <div class="space-y-6">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-8 text-center lg:text-right font-cairo text-primary">معلومات التواصل</h3>
                         
                         <!-- WhatsApp -->
-                        <div class="flex items-center mb-6 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center ml-4">
-                                <i class="fab fa-whatsapp text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-green-600">واتساب</h4>
-                                <a href="https://wa.me/971123456789" class="text-green-500 hover:text-green-600 transition-colors" dir="ltr">
-                                    +971 123 456 789
-                                </a>
+                        <div class="card-hover bg-white dark:bg-gray-700 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-600">
+                            <div class="flex items-center">
+                                <div class="w-14 h-14 md:w-16 md:h-16 bg-green-500 rounded-full flex items-center justify-center ml-4 flex-shrink-0">
+                                    <i class="fab fa-whatsapp text-white text-xl md:text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg md:text-xl text-green-600 font-cairo mb-1">واتساب</h4>
+                                    <a href="https://wa.me/971123456789" class="text-green-500 hover:text-green-600 transition-colors text-base md:text-lg" dir="ltr">
+                                        +971 123 456 789
+                                    </a>
+                                    <p class="text-gray-500 text-sm font-cairo">الأسرع للرد والاستفسار</p>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Phone -->
-                        <div class="flex items-center mb-6 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md">
-                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center ml-4">
-                                <i class="fas fa-phone text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-600">الهاتف المباشر</h4>
-                                <a href="tel:971123456789" class="text-blue-500 hover:text-blue-600 transition-colors" dir="ltr">
-                                    +971 123 456 789
-                                </a>
+                        <div class="card-hover bg-white dark:bg-gray-700 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-600">
+                            <div class="flex items-center">
+                                <div class="w-14 h-14 md:w-16 md:h-16 bg-blue-500 rounded-full flex items-center justify-center ml-4 flex-shrink-0">
+                                    <i class="fas fa-phone text-white text-xl md:text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg md:text-xl text-blue-600 font-cairo mb-1">الهاتف المباشر</h4>
+                                    <a href="tel:971123456789" class="text-blue-500 hover:text-blue-600 transition-colors text-base md:text-lg" dir="ltr">
+                                        +971 123 456 789
+                                    </a>
+                                    <p class="text-gray-500 text-sm font-cairo">متاح طوال أيام الأسبوع</p>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Location -->
-                        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md">
-                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center ml-4">
-                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-red-600">الموقع</h4>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    بني ياس شرق 10<br>
-                                    بالقرب من لابيل للشوكولاتة والزهور
-                                </p>
+                        <div class="card-hover bg-white dark:bg-gray-700 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-600">
+                            <div class="flex items-center">
+                                <div class="w-14 h-14 md:w-16 md:h-16 bg-red-500 rounded-full flex items-center justify-center ml-4 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-white text-xl md:text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg md:text-xl text-red-600 font-cairo mb-1">موقعنا</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 font-cairo text-base">
+                                        بني ياس شرق 10<br>
+                                        بالقرب من لابيل للشوكولاتة والزهور
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Quick Order Form -->
-                    <div class="bg-gradient-to-br from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 rounded-3xl p-8 shadow-xl">
-                        <h3 class="text-2xl font-bold mb-6 text-center">طلب سريع</h3>
-                        <form id="orderForm" class="space-y-4">
+                    <div class="bg-white dark:bg-gray-700 rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100 dark:border-gray-600">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center font-cairo text-primary">طلب سريع</h3>
+                        <form id="orderForm" class="space-y-6">
                             <div>
-                                <label class="block text-sm font-bold mb-2">اسمك الكريم</label>
-                                <input type="text" id="customerName" class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-800 text-base" placeholder="أدخلي اسمك">
+                                <label class="block text-sm font-bold mb-2 font-cairo text-gray-700 dark:text-gray-300">اسمك الكريم *</label>
+                                <input type="text" id="customerName" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-base font-cairo" placeholder="أدخلي اسمك الكريم" required>
                             </div>
+                            
                             <div>
-                                <label class="block text-sm font-bold mb-2">المنتج المطلوب</label>
-                                <select id="selectedProduct" class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-800 text-base">
-                                    <option value="">اختاري المنتج</option>
-                                    <option value="زيت كركار">زيت كركار الطبيعي</option>
-                                    <option value="صابون صابونيه">صابون صابونيه</option>
-                                    <option value="كريم شعر سواني">كريم شعر سواني</option>
+                                <label class="block text-sm font-bold mb-2 font-cairo text-gray-700 dark:text-gray-300">رقم الهاتف *</label>
+                                <input type="tel" id="customerPhone" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-base font-cairo" placeholder="رقم الهاتف للتواصل" required dir="ltr">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-bold mb-2 font-cairo text-gray-700 dark:text-gray-300">المنتج المطلوب *</label>
+                                <select id="selectedProduct" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-base font-cairo" required>
+                                    <option value="">اختاري المنتج المطلوب</option>
+                                    <option value="زيت كركار الطبيعي">زيت كركار الطبيعي</option>
+                                    <option value="صابون صابونيه الطبيعي">صابون صابونيه الطبيعي</option>
+                                    <option value="كريم شعر سواني المغذي">كريم شعر سواني المغذي</option>
                                 </select>
                             </div>
+                            
                             <div>
-                                <label class="block text-sm font-bold mb-2">ملاحظات إضافية</label>
-                                <textarea id="orderNotes" rows="3" class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-800 text-base" placeholder="أي ملاحظات أو استفسارات..."></textarea>
+                                <label class="block text-sm font-bold mb-2 font-cairo text-gray-700 dark:text-gray-300">الكمية المطلوبة</label>
+                                <select id="quantity" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-base font-cairo">
+                                    <option value="1">قطعة واحدة</option>
+                                    <option value="2">قطعتان</option>
+                                    <option value="3">3 قطع</option>
+                                    <option value="4">4 قطع</option>
+                                    <option value="5">5 قطع أو أكثر</option>
+                                </select>
                             </div>
-                            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-xl font-bold transition-all transform hover:scale-105">
+                            
+                            <div>
+                                <label class="block text-sm font-bold mb-2 font-cairo text-gray-700 dark:text-gray-300">ملاحظات إضافية</label>
+                                <textarea id="orderNotes" rows="3" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-base font-cairo resize-none" placeholder="أي ملاحظات أو استفسارات خاصة..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full text-white py-4 rounded-xl font-bold transition-all font-cairo text-lg">
+                                <i class="fab fa-whatsapp ml-2 text-xl"></i>
                                 إرسال الطلب عبر واتساب
                             </button>
                         </form>
@@ -670,35 +580,54 @@
     </section>
 
     <!-- Footer -->
-    <footer class="gradient-bg text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <div class="mb-8">
-                <h3 class="text-3xl font-bold mb-2">أم حمودي</h3>
-                <p class="text-lg opacity-90">للمستحضرات النسائية الطبيعية</p>
+    <footer class="hero-bg text-white py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-8">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center ml-4 backdrop-blur-sm">
+                            <i class="fas fa-gem text-gold text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold font-amiri">أم حمودي</h3>
+                            <p class="text-base md:text-lg opacity-90 font-cairo">للمستحضرات النسائية الطبيعية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
+                    <a href="https://wa.me/971123456789" class="flex items-center bg-green-500 hover:bg-green-600 px-6 py-3 rounded-xl transition-all">
+                        <i class="fab fa-whatsapp text-xl ml-2"></i>
+                        <span class="font-cairo font-semibold">تواصل عبر واتساب</span>
+                    </a>
+                    <a href="tel:971123456789" class="flex items-center bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl transition-all">
+                        <i class="fas fa-phone text-xl ml-2"></i>
+                        <span class="font-cairo font-semibold">اتصلي بنا</span>
+                    </a>
+                </div>
+                
+                <div class="border-t border-white border-opacity-20 pt-8">
+                    <p class="opacity-75 font-cairo text-sm md:text-base">
+                        © 2024 أم حمودي للمستحضرات النسائية. جميع الحقوق محفوظة.
+                    </p>
+                </div>
             </div>
-            
-            <div class="flex justify-center space-x-6 space-x-reverse mb-8">
-                <a href="https://wa.me/971123456789" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
-                    <i class="fab fa-whatsapp text-xl"></i>
-                </a>
-                <a href="tel:971123456789" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
-                    <i class="fas fa-phone text-xl"></i>
-                </a>
-            </div>
-            
-            <p class="opacity-75">© 2024 أم حمودي للمستحضرات النسائية. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <script>
         function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ 
-                behavior: 'smooth' 
-            });
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
 
         function contactUs(productName) {
-            const message = `السلام عليكم، أريد الاستفسار عن ${productName}`;
+            const message = `السلام عليكم ورحمة الله وبركاته\n\nأريد الاستفسار عن: ${productName}\n\nأرجو التواصل معي في أقرب وقت، شكراً لكم.`;
             const whatsappUrl = `https://wa.me/971123456789?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
@@ -708,32 +637,43 @@
             e.preventDefault();
             
             const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
             const product = document.getElementById('selectedProduct').value;
+            const quantity = document.getElementById('quantity').value;
             const notes = document.getElementById('orderNotes').value.trim();
             
             if (!name) {
-                showAlert('يرجى إدخال اسمك الكريم');
+                showNotification('يرجى إدخال اسمك الكريم', 'error');
+                return;
+            }
+            
+            if (!phone) {
+                showNotification('يرجى إدخال رقم الهاتف', 'error');
                 return;
             }
             
             if (!product) {
-                showAlert('يرجى اختيار المنتج المطلوب');
+                showNotification('يرجى اختيار المنتج المطلوب', 'error');
                 return;
             }
             
             let message = `السلام عليكم ورحمة الله وبركاته\n\n`;
-            message += `الاسم: ${name}\n`;
-            message += `المنتج المطلوب: ${product}\n`;
+            message += `📋 *طلب جديد من العميلة*\n\n`;
+            message += `👤 الاسم: ${name}\n`;
+            message += `📱 رقم الهاتف: ${phone}\n`;
+            message += `🛍️ المنتج: ${product}\n`;
+            message += `📦 الكمية: ${quantity}\n`;
             if (notes) {
-                message += `ملاحظات: ${notes}\n`;
+                message += `📝 ملاحظات: ${notes}\n`;
             }
-            message += `\nأرجو التواصل معي لتأكيد الطلب، شكراً لكم.`;
+            message += `\nأرجو التواصل معي لتأكيد الطلب والتفاصيل، شكراً لكم.`;
             
             const whatsappUrl = `https://wa.me/971123456789?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
-            // Reset form
+            // Reset form and show success message
             document.getElementById('orderForm').reset();
+            showNotification('تم إرسال طلبك بنجاح! سنتواصل معك قريباً', 'success');
         });
 
         function toggleMobileMenu() {
@@ -741,43 +681,52 @@
             mobileMenu.classList.toggle('hidden');
         }
 
-        function showAlert(message) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full flex items-center';
-            alertDiv.innerHTML = `
-                <i class="fas fa-exclamation-circle ml-2"></i>
-                <span>${message}</span>
-            `;
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300 translate-y-[-100px] flex items-center max-w-md mx-auto`;
             
-            document.body.appendChild(alertDiv);
+            if (type === 'success') {
+                notification.className += ' bg-green-500 text-white';
+                notification.innerHTML = `<i class="fas fa-check-circle ml-2"></i><span class="font-cairo">${message}</span>`;
+            } else if (type === 'error') {
+                notification.className += ' bg-red-500 text-white';
+                notification.innerHTML = `<i class="fas fa-exclamation-circle ml-2"></i><span class="font-cairo">${message}</span>`;
+            } else {
+                notification.className += ' bg-blue-500 text-white';
+                notification.innerHTML = `<i class="fas fa-info-circle ml-2"></i><span class="font-cairo">${message}</span>`;
+            }
+            
+            document.body.appendChild(notification);
             
             // Slide in
             setTimeout(() => {
-                alertDiv.classList.remove('translate-x-full');
+                notification.classList.remove('translate-y-[-100px]');
             }, 100);
             
-            // Remove after 3 seconds
+            // Remove after 4 seconds
             setTimeout(() => {
-                alertDiv.classList.add('translate-x-full');
+                notification.classList.add('translate-y-[-100px]');
                 setTimeout(() => {
-                    if (document.body.contains(alertDiv)) {
-                        document.body.removeChild(alertDiv);
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
                     }
                 }, 300);
-            }, 3000);
+            }, 4000);
         }
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling for all navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
             });
         });
     </script>
